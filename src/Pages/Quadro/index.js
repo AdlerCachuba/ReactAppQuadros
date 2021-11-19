@@ -11,7 +11,6 @@ export default class Quadro extends Component{
                 <TouchableOpacity onPress={()=> alert(this.props.data.nome)}>
                     <Image style={styles.fotoQuadro} source={{uri: this.props.data.foto}}></Image>
                 </TouchableOpacity>
-
             </View>
         )
     }
