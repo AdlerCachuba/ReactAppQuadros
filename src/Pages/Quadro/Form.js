@@ -1,21 +1,53 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { View, StyleSheet} from "react-native";
 import { TextInput, Title, Button } from "react-native-paper";
 import api from "../../Services/Api";
+import isEqual from "lodash/isEqual";
 
-const Form = ({isCreate = true}) => {
+const Form = ({isCreate = true, id = "0"}) => {
     const [name, onChangeName] = React.useState("");
     const [description, onChangeDescription] = React.useState("");
     const [price, onChangePrice] = React.useState("");
     const [photoUrl, onChangePhotoUrl] = React.useState("");
     const [isLoading, onChangeIsLoading] = React.useState(false);
+    const [sectionList, onChangeSectionList] = React.useState([]);
+    const [sectionId, onChangeSectionId] = React.useState();
+    const [gotQuadro, onChangeGotQuadro] = React.useState(false);
 
-    const {
-        input,
-        title,
-        button,
-        container
-    } = styles;
+
+    useEffect(async () => {
+        if (!isCreate && !isEqual(id, "0") && !gotQuadro) {
+            await getQuadro();
+            onChangeGotQuadro(true);
+        }
+    });
+
+    const getQuadro = async  () => {
+        const response = await api.get(
+            '/products/getbyid',
+            {
+                headers: {
+                    'id': id
+                }
+            }
+        );
+
+        const {
+            name,
+            description,
+            price,
+            photoUrl,
+            sectionId,
+        } = response.data.data
+
+        if(response.data.status) {
+            onChangeName(name);
+            onChangeDescription(description);
+            onChangePrice(price.toString());
+            onChangePhotoUrl(photoUrl);
+            onChangeSectionId(sectionId);
+        }
+    }
 
     const save = async () => {
         onChangeIsLoading(true);
@@ -38,7 +70,8 @@ const Form = ({isCreate = true}) => {
 
     const edit = async () => {
         onChangeIsLoading(true);
-        const response = await api.post('/products/update', {
+        const response = await api.put('/products/update', {
+            id: parseInt(id),
             name: name,
             description: description,
             price: parseFloat(price),
@@ -46,16 +79,24 @@ const Form = ({isCreate = true}) => {
             photoUrl: photoUrl
         });
         onChangeIsLoading(false);
-        if(response.data.status) {
-            onChangeName("");
-            onChangeDescription("");
-            onChangePrice("");
-            onChangePhotoUrl("");
-        }
+        // if(response.data.status) {
+        //     onChangeName("");
+        //     onChangeDescription("");
+        //     onChangePrice("");
+        //     onChangePhotoUrl("");
+        // }
         console.warn(response);
     }
 
+    const {
+        input,
+        title,
+        button,
+        container
+    } = styles;
+
     return (
+
         <View style={container}>
             {
                 isCreate
@@ -84,6 +125,7 @@ const Form = ({isCreate = true}) => {
                 keyboardType="numeric"
                 activeUnderlineColor="red"
             />
+
             <TextInput
                 style={input}
                 onChangeText={onChangePhotoUrl}
@@ -93,7 +135,10 @@ const Form = ({isCreate = true}) => {
             />
             <Button
                 mode="contained"
-                onPress={() => save()}
+                onPress={() => isCreate
+                    ? save()
+                    : edit()
+                }
                 color='red'
                 style={button}
                 loading={isLoading}
