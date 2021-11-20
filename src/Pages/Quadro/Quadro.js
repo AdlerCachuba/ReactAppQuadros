@@ -1,6 +1,5 @@
 import React, {Component} from "react";
 import {View,Text,Image,StyleSheet, TouchableOpacity} from 'react-native';
-import {Touchable} from "react-native-web";
 
 export default class Quadro extends Component{
     render(){

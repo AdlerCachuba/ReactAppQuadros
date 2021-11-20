@@ -4,6 +4,8 @@ import { TextInput, Title, Button } from "react-native-paper";
 import api from "../../Services/Api";
 import isEqual from "lodash/isEqual";
 
+const  activeColor = '#6100ed';
+
 const Form = ({isCreate = true, id = "0"}) => {
     const [name, onChangeName] = React.useState("");
     const [description, onChangeDescription] = React.useState("");
@@ -79,12 +81,6 @@ const Form = ({isCreate = true, id = "0"}) => {
             photoUrl: photoUrl
         });
         onChangeIsLoading(false);
-        // if(response.data.status) {
-        //     onChangeName("");
-        //     onChangeDescription("");
-        //     onChangePrice("");
-        //     onChangePhotoUrl("");
-        // }
         console.warn(response);
     }
 
@@ -108,14 +104,14 @@ const Form = ({isCreate = true, id = "0"}) => {
                 onChangeText={onChangeName}
                 value={name}
                 placeholder="Nome"
-                activeUnderlineColor="red"
+                activeUnderlineColor={activeColor}
             />
             <TextInput
                 style={input}
                 onChangeText={onChangeDescription}
                 value={description}
                 placeholder="Descrição"
-                activeUnderlineColor="red"
+                activeUnderlineColor={activeColor}
             />
             <TextInput
                 style={input}
@@ -123,7 +119,7 @@ const Form = ({isCreate = true, id = "0"}) => {
                 value={price}
                 placeholder="Preço"
                 keyboardType="numeric"
-                activeUnderlineColor="red"
+                activeUnderlineColor={activeColor}
             />
 
             <TextInput
@@ -131,7 +127,7 @@ const Form = ({isCreate = true, id = "0"}) => {
                 onChangeText={onChangePhotoUrl}
                 value={photoUrl}
                 placeholder="Url da Imagem"
-                activeUnderlineColor="red"
+                activeUnderlineColor={activeColor}
             />
             <Button
                 mode="contained"
@@ -139,7 +135,7 @@ const Form = ({isCreate = true, id = "0"}) => {
                     ? save()
                     : edit()
                 }
-                color='red'
+                color='#6100ed'
                 style={button}
                 loading={isLoading}
             >Salvar</Button>
@@ -166,6 +162,7 @@ const styles = StyleSheet.create({
         width: '100%',
         height: '100%',
         justifyContent: 'center',
+        backgroundColor: 'black'
     }
 });
 
