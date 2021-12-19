@@ -4,7 +4,8 @@ import Quadro from "./Quadro";
 
 const List = (props) => {
     const {
-        list
+        list,
+        onEdit
     } = props
 
     return (
@@ -13,7 +14,7 @@ const List = (props) => {
                 data = { list }
                 keyExtractor = { item => item.id }
                 renderItem = {
-                    ({ item }) => <Quadro data={ item }/>
+                    ({ item }) => <Quadro data={ item } onPress={onEdit}/>
                 }
             >
             </FlatList>

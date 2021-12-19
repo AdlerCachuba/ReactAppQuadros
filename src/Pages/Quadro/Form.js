@@ -15,17 +15,15 @@ const Form = ({isCreate = true, id = "0"}) => {
     const [isLoading, onChangeIsLoading] = React.useState(false);
     const [sectionList, onChangeSectionList] = React.useState([]);
     const [sectionId, onChangeSectionId] = React.useState();
-    const [gotQuadro, onChangeGotQuadro] = React.useState(false);
 
     useEffect(async () => {
-        if (!isCreate && !isEqual(id, "0") && !gotQuadro) {
+        if (!isCreate && !isEqual(id, "0")) {
             await getQuadro();
-            onChangeGotQuadro(true);
         }
 
         const response = await api.get('/select/selectsections');
         onChangeSectionList(response.data.data)
-    });
+    }, []);
 
     const getQuadro = async  () => {
         const response = await api.get(

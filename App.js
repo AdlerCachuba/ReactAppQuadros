@@ -13,6 +13,7 @@ const App = () => {
     ]);
     const [quadros, onChangeQuadros] = React.useState([]);
     const [isLoading, onChangeIsLoading] = React.useState(true);
+    const [id, onChangeId] = React.useState("0");
 
     useEffect(() => {
         Promise.all(
@@ -24,9 +25,14 @@ const App = () => {
             }
         )
     },[])
+    // criar uma função para alterar index do bottom navigation bar e passar por parametro para List -> quadro e deve ser chamada no onpressed
+    const onEdit = (id) => {
+        setIndex(1);
+        onChangeId(id.toString());
+    }
 
-    const list = () => <List list={quadros}/>
-    const form = () => <Form/>
+    const list = () => <List list={quadros} onEdit={onEdit}/>
+    const form = () => <Form isCreate={id === "0"} id={id}/>
 
     const renderScene = BottomNavigation.SceneMap({
         list,
