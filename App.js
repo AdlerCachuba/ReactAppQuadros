@@ -24,14 +24,19 @@ const App = () => {
                 onChangeIsLoading(false)
             }
         )
-    },[])
+    },[ isLoading ])
+
     // criar uma função para alterar index do bottom navigation bar e passar por parametro para List -> quadro e deve ser chamada no onpressed
-    const onEdit = (id) => {
-        setIndex(1);
-        onChangeId(id.toString());
+    // const onEdit = (id) => {
+    //     setIndex(1);
+    //     onChangeId(id.toString());
+    // }
+
+    const reload = () => {
+        onChangeIsLoading(true)
     }
 
-    const list = () => <List list={quadros} onEdit={onEdit}/>
+    const list = () => <List list={quadros} reload={reload}/>
     const form = () => <Form isCreate={id === "0"} id={id}/>
 
     const renderScene = BottomNavigation.SceneMap({
@@ -41,7 +46,7 @@ const App = () => {
 
     if (isLoading) {
         return <View style={[styles.container]}>
-            <ActivityIndicator size="large" />
+            <ActivityIndicator size="large"/>
         </View>
     }
 

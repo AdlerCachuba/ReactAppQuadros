@@ -1,27 +1,50 @@
-import React, {Component} from "react";
-import {View, Text, Image, StyleSheet, TouchableOpacity, TouchableHighlight, Alert } from 'react-native';
+import
+    React, {
+    Component
+} from "react";
+import {
+    View,
+    Text,
+    Image,
+    StyleSheet,
+    TouchableHighlight,
+    Alert
+} from 'react-native';
 import isNull from "lodash/isNull";
 import api from "../../Services/Api";
 
-const Quadro = ({data, onPress}) => {
+const Quadro = ({data, reload}) => {
     const {
         nome,
         foto,
         id
     } = data
 
+    const deleteById = () => {
+        Promise.all(
+            [
+                api.delete(
+                    '/products/delete',
+                    {
+                        headers: {'id': id}
+                    }
+                )
+            ]
+        ).then(
+            (response)=> {
+                reload()
+            }
+        )
+    }
+
     const showConfirmDialog = () => {
         return Alert.alert(
-            "Alerta",
+            "Atenção!",
             "Você tem certeza que deseja remover?",
             [
                 {
                     text: "Sim",
-                    onPress: async () => {
-                        const response = await api.delete('/products/delete', {
-                            headers: {'id': id}
-                        });
-                    },
+                    onPress: deleteById
                 },
                 {
                     text: "Não",
@@ -36,9 +59,6 @@ const Quadro = ({data, onPress}) => {
             <Text style={styles.nomeQuadro}>{nome} </Text>
             <TouchableHighlight
                 onPress={showConfirmDialog}
-        //        onPress={()=> alert(nome)}
-        //        onLongPress={showConfirmDialog}
-                delayLongPress={10000}
             >
                 <Image style={styles.fotoQuadro} source={{
                     uri: isNull(foto)

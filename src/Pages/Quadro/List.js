@@ -5,7 +5,7 @@ import Quadro from "./Quadro";
 const List = (props) => {
     const {
         list,
-        onEdit
+        reload
     } = props
 
     return (
@@ -14,7 +14,7 @@ const List = (props) => {
                 data = { list }
                 keyExtractor = { item => item.id }
                 renderItem = {
-                    ({ item }) => <Quadro data={ item } onPress={onEdit}/>
+                    ({ item }) => <Quadro data={ item } reload={reload}/>
                 }
             >
             </FlatList>
