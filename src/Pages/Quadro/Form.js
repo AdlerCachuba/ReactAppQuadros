@@ -68,7 +68,6 @@ const Form = ({isCreate = true, id = "0"}) => {
             onChangePrice("");
             onChangePhotoUrl("");
         }
-        console.warn(response);
     }
 
     const edit = async () => {
@@ -82,7 +81,6 @@ const Form = ({isCreate = true, id = "0"}) => {
             photoUrl: photoUrl
         });
         onChangeIsLoading(false);
-        console.warn(response);
     }
 
     const {

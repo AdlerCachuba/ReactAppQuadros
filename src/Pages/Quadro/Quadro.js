@@ -58,6 +58,7 @@ const Quadro = ({data, reload}) => {
         <View>
             <Text style={styles.nomeQuadro}>{nome} </Text>
             <TouchableHighlight
+                onLongPress={() => onEdit(id)}
                 onPress={showConfirmDialog}
             >
                 <Image style={styles.fotoQuadro} source={{
