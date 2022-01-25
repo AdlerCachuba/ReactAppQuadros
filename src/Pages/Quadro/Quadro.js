@@ -1,6 +1,6 @@
 import
     React, {
-    Component
+    Component, useEffect
 } from "react";
 import {
     View,
@@ -13,7 +13,7 @@ import {
 import isNull from "lodash/isNull";
 import api from "../../Services/Api";
 
-const Quadro = ({data, reload}) => {
+const Quadro = ({data, reload, onEdit}) => {
     const {
         nome,
         foto,
@@ -52,6 +52,7 @@ const Quadro = ({data, reload}) => {
             ]
         );
     };
+
 
 
     return(

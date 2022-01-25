@@ -43,6 +43,7 @@ const Form = ({isCreate = true, id = "0"}) => {
             sectionId,
         } = response.data.data
 
+
         if(response.data.status) {
             onChangeName(name);
             onChangeDescription(description);
@@ -132,6 +133,7 @@ const Form = ({isCreate = true, id = "0"}) => {
                     borderTopRightRadius: 4
                 }}
                 onChangeText={onChangeSectionId}
+                value={sectionId}
             />
             <TextInput
                 style={input}
