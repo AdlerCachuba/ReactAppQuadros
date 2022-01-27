@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { StyleSheet, View} from 'react-native';
 import { BottomNavigation, ActivityIndicator } from 'react-native-paper';
-import List from "./src/Pages/Quadro/List";
-import Form from './src/Pages/Quadro/Form';
-import api from "./src/Services/Api" ;
+import List from "./src/pages/List";
+import Form from './src/pages/Form';
+import api from "./src/services/Api" ;
 
 const App = () => {
     const [index, setIndex] = React.useState(0);

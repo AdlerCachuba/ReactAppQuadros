@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { View, StyleSheet} from "react-native";
 import { TextInput, Title, Button } from "react-native-paper";
 import { Dropdown } from 'react-native-material-dropdown';
-import api from "../../Services/Api";
+import api from "../services/Api";
 import isEqual from "lodash/isEqual";
 
 const  activeColor = '#6100ed';

@@ -11,7 +11,7 @@ import {
     Alert
 } from 'react-native';
 import isNull from "lodash/isNull";
-import api from "../../Services/Api";
+import api from "../services/Api";
 
 const Quadro = ({data, reload, onEdit}) => {
     const {
