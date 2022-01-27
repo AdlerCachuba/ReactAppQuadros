@@ -17,7 +17,8 @@ const Quadro = ({data, reload, onEdit}) => {
     const {
         nome,
         foto,
-        id
+        id,
+        preco
     } = data
 
     const deleteById = () => {
@@ -53,11 +54,10 @@ const Quadro = ({data, reload, onEdit}) => {
         );
     };
 
-
-
     return(
         <View>
             <Text style={styles.nomeQuadro}>{nome} </Text>
+            <Text style={styles.preco}>R${preco} </Text>
             <TouchableHighlight
                 onLongPress={() => onEdit(id)}
                 onPress={showConfirmDialog}
@@ -83,10 +83,14 @@ const styles = StyleSheet.create({
         justifyContent:'center',
         alignSelf:'center',
         marginTop: 30,
-        marginBottom:20,
-
     },
-
+    preco:{
+        color:'white',
+        fontSize:17,
+        justifyContent:'center',
+        alignSelf:'center',
+        marginBottom:10,
+    },
     fotoQuadro:{
         width: 200,
         height:250,
